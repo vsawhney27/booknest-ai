@@ -1,0 +1,32 @@
+name: Forbidden Terms Check
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  check-forbidden-terms:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Make script executable
+      run: chmod +x scripts/check-forbidden-terms.sh
+    
+    - name: Run forbidden terms check
+      run: ./scripts/check-forbidden-terms.sh
+      
+    - name: Report results
+      if: success()
+      run: echo "✅ Repository is clean - no forbidden vendor terms found"
+      
+    - name: Fail on violations
+      if: failure()
+      run: |
+        echo "🚨 Build failed due to forbidden vendor terms"
+        echo "Please remove all vendor-specific terms before merging"
+        exit 1

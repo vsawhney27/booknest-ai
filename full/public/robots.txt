@@ -1,0 +1,21 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://booknest.ai/sitemap.xml
+
+# Performance optimization - allow crawling of assets
+Allow: /assets/
+Allow: /css/
+Allow: /images/
+Allow: /js/
+
+# Block access to development files and sensitive areas
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /.env
+Disallow: /package.json
+Disallow: /package-lock.json
+
+# Crawl-delay for politeness (optional)
+Crawl-delay: 1

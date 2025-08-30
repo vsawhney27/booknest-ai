@@ -1,0 +1,196 @@
+version: 2
+project: "BookNest AI — One-Page Relaunch (Template: full/)"
+current_task: T11
+rules:
+  - "Work ONLY inside the folder named full/ (the expanded template)."
+  - "Adapt the template; do NOT scaffold a new project or add frameworks."
+  - "Follow tasks sequentially and STOP after each task. Wait for the user to say 'continue'."
+  - "Exclude the ROI calculator entirely."
+  - "Never include or output vendor names: Retell, Retell AI, ElevenLabs, 11labs, Eleven Labs."
+  - "No vendor names in code comments, alt text, IDs, classes, filenames, or meta."
+forbidden_terms:
+  - "Retell"
+  - "Retell AI"
+  - "ElevenLabs"
+  - "11labs"
+  - "Eleven Labs"
+
+tasks:
+  - id: T01
+    title: Template Audit & Plan
+    goal: Confirm the template source and produce a consolidation plan.
+    instructions:
+      - List the folder tree under full/ (html, css, js, img).
+      - Identify which files/pages will be merged into index.html and which will be removed.
+      - Output a proposed section order matching the PRD IA.
+    deliverables:
+      - A file map and a merge/delete checklist.
+    acceptance_criteria:
+      - Clear plan referencing actual files in full/.
+    stop: true
+
+  - id: T02
+    title: One-Page Scaffold
+    goal: Create single-page structure using template components.
+    instructions:
+      - Create full/index.html with empty sections/anchors: hero, wins, capabilities, how-it-works, solutions, pricing, security, faqs, contact, footer.
+      - Wire up sticky header links to those anchors; add skip link.
+      - Set up assets: assets/css/main.css, assets/js/main.js (imported by index.html).
+      - Remove unused pages and update internal links.
+    acceptance_criteria:
+      - Can navigate to all sections via header; no dead links.
+    stop: true
+
+  - id: T03
+    title: Global Theme Tokens
+    goal: Implement brand tokens and base styles.
+    instructions:
+      - In assets/css/main.css define CSS variables for colors, spacing, and type scale per PRD.
+      - Ensure AA contrast; apply to buttons, headings, body.
+    acceptance_criteria:
+      - No inline hex colors in components; tokens used consistently.
+    stop: true
+
+  - id: T04
+    title: Hero & CTAs
+    goal: Implement hero content from PRD.
+    instructions:
+      - Add headline, sub, primary "Book a Demo", secondary "Hear a Sample Call".
+      - Optional phone frame/image from template; keep file sizes optimized.
+    acceptance_criteria:
+      - Mobile/desktop layouts pass basic responsiveness; CTAs scroll/open targets.
+    stop: true
+
+  - id: T05
+    title: What It Does (Big Wins)
+    goal: 3–5 benefit cards with micro-interactions.
+    instructions:
+      - Implement cards with icons from template; hover/press states.
+      - Copy from PRD.
+    acceptance_criteria:
+      - Keyboard focusable; hover and press animations present.
+    stop: true
+
+  - id: T06
+    title: Capabilities Accordion
+    goal: Grouped, collapsible capabilities (no vendor names).
+    instructions:
+      - Groups: Call Handling; Appointments & Scheduling; Customer Service; Business Integrations; Communication; Advanced & Governance.
+      - Use accessible accordion pattern with ARIA attributes; reduced-motion honored.
+    acceptance_criteria:
+      - Axe shows no ARIA/contrast criticals in this section.
+    stop: true
+
+  - id: T07
+    title: How It Works
+    goal: 3-step timeline with on-scroll reveals.
+    instructions:
+      - Steps: Connect → Configure → Go Live; concise copy.
+    acceptance_criteria:
+      - IntersectionObserver reveal implemented; respects prefers-reduced-motion.
+    stop: true
+
+  - id: T08
+    title: Solutions by Industry
+    goal: Tabs or cards; Spa default.
+    instructions:
+      - Implement accessible tabs or selectable cards (Spa default; + Real Estate, Clinics placeholders).
+    acceptance_criteria:
+      - Tabs operable via keyboard; focus states visible.
+    stop: true
+
+  - id: T09
+    title: Pricing (No Calculator)
+    goal: Simple ranges.
+    instructions:
+      - Insert editable copy from PRD; add “How pricing works” FAQ link.
+    acceptance_criteria:
+      - No calculator anywhere; layout responsive.
+    stop: true
+
+  - id: T10
+    title: Security & Compliance
+    goal: Short, credible bullets.
+    instructions:
+      - Encryption, RBAC, audit logs, data ownership; healthcare-ready note.
+    acceptance_criteria:
+      - No numeric SLA/uptime claims; no vendor names.
+    stop: true
+
+  - id: T11
+    title: FAQs
+    goal: 6–8 Q&A, collapsible.
+    instructions:
+      - Seed with PRD questions; ensure accessible disclosure widgets.
+    acceptance_criteria:
+      - Keyboard + screen reader friendly.
+    stop: true
+
+  - id: T12
+    title: Contact & Demo
+    goal: Lead form + calendar embed.
+    instructions:
+      - Form posts to /api/lead (placeholder); client-side validation + honeypot.
+      - Optional Cal.com embed in modal or section.
+      - Show success/failure toasts.
+    acceptance_criteria:
+      - Form works locally (mock); accessible error states.
+    stop: true
+
+  - id: T13
+    title: Motion System
+    goal: Fade-in on scroll + button/card micro-interactions.
+    instructions:
+      - IO threshold 0.15; 260ms ease-out; 8px translate.
+      - Hover scale 1.01 / press 0.99; subtle shadow changes.
+    acceptance_criteria:
+      - Reduced-motion respected; no jank.
+    stop: true
+
+  - id: T14
+    title: A11y & Performance
+    goal: Fix violations; hit targets.
+    instructions:
+      - Run Axe/Lighthouse; compress images; defer/lazy-load below fold.
+    acceptance_criteria:
+      - Lighthouse: Perf ≥90, A11y ≥95, BP ≥95, SEO ≥90.
+    stop: true
+
+  - id: T15
+    title: SEO, Meta, and Assets
+    goal: Provide titles/meta/OG; clean assets.
+    instructions:
+      - Title/description; OG image; favicon; sitemap.xml; robots.txt.
+      - Remove unused images/fonts/scripts.
+    acceptance_criteria:
+      - Metadata present; no broken OG/Twitter cards.
+    stop: true
+
+  - id: T16
+    title: Forbidden-Term Guardrail
+    goal: CI script to block vendor traces.
+    instructions:
+      - Add script that greps repository (including HTML/CSS/JS/meta/alt) for forbidden_terms and exits non-zero if matched.
+      - Run and show “0 matches”.
+    acceptance_criteria:
+      - Build fails on forbidden terms; current tree has zero matches.
+    stop: true
+
+  - id: T17
+    title: E2E Smoke Tests
+    goal: Minimal Playwright tests.
+    instructions:
+      - Tests for: header anchors + smooth scroll; accordion open/close; form submit (mock); reduced-motion behavior.
+      - Use data-testid attributes as needed.
+    acceptance_criteria:
+      - Tests pass locally.
+    stop: true
+
+  - id: T18
+    title: Final Polish (Content & QA)
+    goal: Proofread, verify links, swap placeholders.
+    instructions:
+      - Sweep copy; verify CTAs; ensure no TODOs/placeholders remain.
+    acceptance_criteria:
+      - Ready for deploy; no placeholders; no forbidden terms.
+    stop: true
