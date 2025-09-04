@@ -100,77 +100,28 @@
   <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js" defer></script>
 </head>
 <body class="antialiased bg-surface text-primary font-heading">
-  <!-- Skip Link for Accessibility -->
-  <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-inverse px-4 py-2 rounded">Skip to main content</a>
+  <!-- Skip link (keep at very top) -->
+  <a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- Sticky Header -->
-  <header class="sticky top-0 z-50 bg-surface border-b border-gray-200" x-data="{ mobileNavOpen: false }">
-    <nav class="py-6">
-      <div class="container mx-auto px-4">
-        <div class="relative flex items-center justify-between">
-          <!-- Logo -->
-          <a class="inline-block" href="#hero">
-            <img class="h-8" src="images/logo-2.svg" alt="BookNest AI"/>
-          </a>
-          
-          <!-- Desktop Navigation -->
-          <ul class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden md:flex">
-            <li class="mr-8"><a class="nav-link" href="#wins">What It Does</a></li>
-            <li class="mr-8"><a class="nav-link" href="#capabilities">Capabilities</a></li>
-            <li class="mr-8"><a class="nav-link" href="#how-it-works">How It Works</a></li>
-            <li class="mr-8"><a class="nav-link" href="#pricing">Pricing</a></li>
-            <li class="mr-8"><a class="nav-link" href="#faqs">FAQs</a></li>
-            <li><a class="nav-link" href="#contact">Contact</a></li>
-          </ul>
-          
-          <!-- CTA Button & Mobile Toggle -->
-          <div class="flex items-center justify-end">
-            <div class="hidden md:block">
-              <a class="btn btn-primary" href="#contact">Book Demo</a>
-            </div>
-            <button class="md:hidden text-pine" x-on:click="mobileNavOpen = !mobileNavOpen" aria-label="Toggle mobile menu">
-              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M5.19995 23.2H26.7999" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                <path d="M5.19995 16H26.7999" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                <path d="M5.19995 8.79999H26.7999" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-    </nav>
-
-    <!-- Mobile Navigation -->
-    <div class="hidden fixed top-0 left-0 bottom-0 w-full xs:w-5/6 xs:max-w-md z-50" :class="{'block': mobileNavOpen, 'hidden': !mobileNavOpen}">
-      <div class="fixed inset-0 bg-primary opacity-20" x-on:click="mobileNavOpen = !mobileNavOpen"></div>
-      <nav class="relative flex flex-col py-7 px-10 w-full h-full bg-surface overflow-y-auto">
-        <div class="flex items-center justify-between">
-          <a class="inline-block" href="#hero"><img class="h-8" src="images/logo-2.svg" alt="BookNest AI"/></a>
-          <button x-on:click="mobileNavOpen = !mobileNavOpen" aria-label="Close mobile menu">
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M23.2 8.79999L8.80005 23.2M8.80005 8.79999L23.2 23.2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-            </svg>
-          </button>
-        </div>
-        <div class="pt-20 pb-12 mb-auto">
-          <ul class="flex-col">
-            <li class="mb-6"><a class="nav-link" href="#wins" x-on:click="mobileNavOpen = false">What It Does</a></li>
-            <li class="mb-6"><a class="nav-link" href="#capabilities" x-on:click="mobileNavOpen = false">Capabilities</a></li>
-            <li class="mb-6"><a class="nav-link" href="#how-it-works" x-on:click="mobileNavOpen = false">How It Works</a></li>
-            <li class="mb-6"><a class="nav-link" href="#pricing" x-on:click="mobileNavOpen = false">Pricing</a></li>
-            <li class="mb-6"><a class="nav-link" href="#faqs" x-on:click="mobileNavOpen = false">FAQs</a></li>
-            <li><a class="nav-link" href="#contact" x-on:click="mobileNavOpen = false">Contact</a></li>
-          </ul>
-        </div>
-        <div class="flex items-center justify-center">
-          <a class="btn btn-primary btn-lg" href="#contact" x-on:click="mobileNavOpen = false">Book Demo</a>
-        </div>
+  <header class="site-header" role="banner" data-testid="site-header">
+    <div class="container header-inner">
+      <nav class="primary-nav" aria-label="Primary">
+        <ul class="nav-list">
+          <li><a class="nav-link" href="#hero" data-nav="hero">Home</a></li>
+          <li><a class="nav-link" href="#wins" data-nav="wins">What it does</a></li>
+          <li><a class="nav-link" href="#capabilities" data-nav="capabilities">Capabilities</a></li>
+          <li><a class="nav-link" href="#how-it-works" data-nav="how-it-works">How it works</a></li>
+          <li><a class="nav-link" href="#solutions" data-nav="solutions">Solutions</a></li>
+          <li><a class="nav-link" href="#pricing" data-nav="pricing">Pricing</a></li>
+          <li><a class="nav-link" href="#security" data-nav="security">Security</a></li>
+          <li><a class="nav-link" href="#faqs" data-nav="faqs">FAQs</a></li>
+          <li><a class="nav-link cta" href="#contact" data-nav="contact">Contact</a></li>
+        </ul>
       </nav>
     </div>
   </header>
 
-  <!-- Main Content -->
-  <main id="main-content">
+  <main id="main">
     <!-- Hero Section -->
     <section id="hero" class="bg-orange-light relative py-12 lg:py-24">
       <div class="container mx-auto px-4">
@@ -829,41 +780,37 @@
         <div class="grid gap-6 lg:grid-cols-[1.1fr_.9fr] items-start reveal-stagger">
           <!-- Left: Contact card -->
           <div class="contact-card rounded-2xl p-6 lg:p-8 bg-white/6 border border-white/10 shadow-xl backdrop-blur-[2px] reveal" data-stagger>
-            <form id="contact-form" class="grid gap-4" autocomplete="on" novalidate>
+            <form id="lead-form" data-form-type="sales" novalidate class="grid gap-4">
               <div class="grid gap-4 sm:grid-cols-2">
-                <div>
-                  <label for="name" class="block text-sm mb-1 opacity-90">Full Name</label>
-                  <input id="name" name="name" type="text" class="input" placeholder="Your full name" required>
-                </div>
-                <div>
-                  <label for="phone" class="block text-sm mb-1 opacity-90">Phone</label>
-                  <input id="phone" name="phone" type="tel" class="input" placeholder="(555) 123-4567">
-                </div>
+                <label>
+                  <span class="block text-sm mb-1 opacity-90">Name</span>
+                  <input name="name" type="text" class="input" placeholder="Your full name" required autocomplete="name">
+                </label>
+                <label>
+                  <span class="block text-sm mb-1 opacity-90">Email</span>
+                  <input name="email" type="email" class="input" placeholder="you@company.com" required autocomplete="email">
+                </label>
               </div>
 
-              <div>
-                <label for="email" class="block text-sm mb-1 opacity-90">Email</label>
-                <input id="email" name="email" type="email" class="input" placeholder="you@company.com" required>
-              </div>
-
-              <div>
-                <label for="company" class="block text-sm mb-1 opacity-90">Company</label>
-                <input id="company" name="company" type="text" class="input" placeholder="Your company name">
-              </div>
-
-              <div>
-                <label for="message" class="block text-sm mb-1 opacity-90">Tell us about your needs</label>
-                <textarea id="message" name="message" rows="4" class="input" placeholder="What challenges are you facing with your current phone system?"></textarea>
-              </div>
-
-              <label class="flex items-start gap-3 text-sm opacity-90">
-                <input type="checkbox" class="accent-lime-400 mt-1" required>
-                <span>I agree to be contacted by BookNest AI regarding my inquiry. See our <a href="/privacy.html" class="underline decoration-lime-300/70 hover:decoration-lime-300">privacy policy</a>.</span>
+              <label>
+                <span class="block text-sm mb-1 opacity-90">Message</span>
+                <textarea name="message" rows="4" class="input" placeholder="What challenges are you facing with your current phone system?" required></textarea>
               </label>
 
-              <div class="flex gap-3">
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </div>
+              <!-- If you're not ready for hCaptcha yet, omit the widget for now. -->
+              <!-- <div class="h-captcha" data-sitekey="YOUR_HCAPTCHA_SITE_KEY"></div> -->
+
+              <button type="submit" class="btn btn-primary" data-testid="submit-inquiry">
+                Submit inquiry
+              </button>
+
+              <p id="lead-success" class="sr-only text-green-400" data-testid="form-success">
+                Thanks! We'll get back to you shortly.
+              </p>
+              <p id="lead-error" class="sr-only text-red-400" data-testid="form-error">
+                Something went wrong. Please try again.
+              </p>
+              <p id="lead-detail" class="sr-only text-red-400"></p>
 
               <p class="text-xs opacity-80">We'll respond within 24 hours to schedule your personalized demo.</p>
             </form>
@@ -878,12 +825,19 @@
 
               <!-- Scheduler embed -->
               <div class="scheduler-embed">
-                <!-- Calendly embed placeholder - replace with actual embed code -->
+                <!-- Cal.com embed -->
                 <div class="bg-white/10 border border-white/20 rounded-lg p-4 text-center">
                   <p class="text-sm opacity-80 mb-3">Book your demo call</p>
-                  <a href="https://calendly.com/booknest-demo" target="_blank" 
-                     class="btn btn-primary">
-                    Open Calendar
+                  <a
+                    class="btn btn-primary"
+                    href="https://cal.com/book-nest-ai-2lensy/book-demo?utm_source=booknest"
+                    data-cal-link="book-nest-ai-2lensy/book-demo"
+                    data-cal-config='{"layout":"month_view","theme":"dark"}'
+                    target="_blank"
+                    rel="noopener"
+                    data-testid="book-demo-btn"
+                  >
+                    Open calendar
                   </a>
                 </div>
               </div>
@@ -893,14 +847,14 @@
             <div class="cta-card">
               <h3 class="text-xl font-semibold mb-4">Talk to Sales</h3>
               <p class="opacity-90 mb-4">Discuss pricing, implementation timeline, and custom requirements.</p>
-              <a href="mailto:sales@booknest.ai" class="btn btn-primary w-full mb-6">Contact Sales</a>
+              <a href="mailto:sales@booknestai.org" class="btn btn-primary w-full mb-6">Contact Sales</a>
             </div>
 
             <!-- Support card -->
             <div class="cta-card">
               <h3 class="text-xl font-semibold mb-4">Support</h3>
               <p class="opacity-90">Already a customer? Get help with setup or ongoing operations.</p>
-              <a href="mailto:booknestai@gmail.com"
+              <a href="mailto:support@booknestai.org"
                  class="btn btn-primary mt-4 w-full"
                  aria-label="Email BookNest AI support">
                  Email Support
@@ -913,7 +867,7 @@
   </main>
 
   <!-- Footer -->
-  <footer class="py-12 bg-gray-900 text-white">
+  <footer class="site-footer py-12 bg-gray-900 text-white">
     <div class="container mx-auto px-4">
       <div class="text-center">
         <img class="h-8 mx-auto mb-6" src="images/logo-2.svg" alt="BookNest AI"/>
@@ -924,6 +878,10 @@
         </div>
         <p class="text-gray-400">&copy; 2024 BookNest AI. All rights reserved.</p>
       </div>
+    </div>
+    <div class="footer-credit">
+      <!-- If you want a tiny credit, uncomment and point to your local asset -->
+      <!-- <img src="quantam-assets/logos/quantam.svg" alt="Template credit" width="72" height="16" loading="lazy" /> -->
     </div>
   </footer>
 
@@ -1009,5 +967,16 @@ document.addEventListener('DOMContentLoaded', () => {
   </script>
   <script src="assets/js/main.js" defer></script>
   <script src="assets/js/main-reveal.js" defer></script>
+  
+  <!-- Cal.com embed script -->
+  <script defer src="https://cal.com/embed.js"></script>
+  <script>
+    window.addEventListener('load', function () {
+      if (window.Cal && typeof window.Cal === 'function') {
+        window.Cal("init", { origin: "https://cal.com" });
+        window.Cal("ui", { theme: "dark" });
+      }
+    });
+  </script>
 </body>
 </html>
